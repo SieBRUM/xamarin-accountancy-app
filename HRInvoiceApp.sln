@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HRInvoiceApp.UWP", "HRInvoiceApp\HRInvoiceApp.UWP\HRInvoiceApp.UWP.csproj", "{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "HRInvoiceApp", "HRInvoiceApp\HRInvoiceApp\HRInvoiceApp.shproj", "{B1520ECD-56B9-4D41-9783-DB49197ACC42}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		HRInvoiceApp\HRInvoiceApp\HRInvoiceApp.projitems*{5abb00c1-a0f0-4741-84ed-ffb2a787e5bd}*SharedItemsImports = 4
+		HRInvoiceApp\HRInvoiceApp\HRInvoiceApp.projitems*{b1520ecd-56b9-4d41-9783-db49197acc42}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Debug|ARM.ActiveCfg = Debug|ARM
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Debug|ARM.Build.0 = Debug|ARM
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Debug|ARM.Deploy.0 = Debug|ARM
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Debug|x64.ActiveCfg = Debug|x64
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Debug|x64.Build.0 = Debug|x64
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Debug|x64.Deploy.0 = Debug|x64
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Debug|x86.ActiveCfg = Debug|x86
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Debug|x86.Build.0 = Debug|x86
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Debug|x86.Deploy.0 = Debug|x86
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Release|ARM.ActiveCfg = Release|ARM
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Release|ARM.Build.0 = Release|ARM
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Release|ARM.Deploy.0 = Release|ARM
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Release|x64.ActiveCfg = Release|x64
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Release|x64.Build.0 = Release|x64
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Release|x64.Deploy.0 = Release|x64
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Release|x86.ActiveCfg = Release|x86
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Release|x86.Build.0 = Release|x86
+		{5ABB00C1-A0F0-4741-84ED-FFB2A787E5BD}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24C3B003-A3EC-441D-BB71-287508DA9A2B}
+	EndGlobalSection
+EndGlobal
