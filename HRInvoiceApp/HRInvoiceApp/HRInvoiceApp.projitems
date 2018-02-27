@@ -21,12 +21,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Tables\Companies.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Tables\CostCenterNumbers.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Tables\Departments.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tables\Company.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tables\Assignment.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tables\Department.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Tables\KvK.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Tables\Provinces.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Tables\Users.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Tables\Workdays.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tables\Province.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tables\User.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Tables\Workday.cs" />
   </ItemGroup>
 </Project>

@@ -5,10 +5,11 @@ using SQLite;
 
 namespace HRInvoiceApp.Tables
 {
-    public class Provinces
+    [Table("Provinces")]
+    public class Province
     {
-        [PrimaryKey]
-        public string Province
+        [PrimaryKey, NotNull]
+        public string ProvinceName
         {
             get;
             set;

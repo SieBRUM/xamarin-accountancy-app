@@ -8,39 +8,40 @@ using System.Text;
 
 namespace HRInvoiceApp.Tables
 {
-    public class Companies
+    [Table("Companies")]
+    public class Company
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey, AutoIncrement, NotNull]
         public int CompanyId
         {
             get;
             set;
         }
-        [ForeignKey(typeof(Departments))]
+        [ForeignKey(typeof(Department)), NotNull]
         public int DepartmentId
         {
             get;
             set;
         }
-        [ForeignKey(typeof(KvK))]
+        [ForeignKey(typeof(KvK)), NotNull]
         public int KvKNumber
         {
             get;
             set;
         }
-        [ForeignKey(typeof(Provinces))]
+        [ForeignKey(typeof(Province)), NotNull]
         public string Province
         {
             get;
             set;
         }
-        [ForeignKey(typeof(Users))]
+        [ForeignKey(typeof(User)), NotNull]
         public int UserId
         {
             get;
             set;
         }
-
+        [NotNull]
         public string CompanyName
         {
             get;
@@ -51,11 +52,13 @@ namespace HRInvoiceApp.Tables
             get;
             set;
         }
+        [NotNull]
         public string City
         {
             get;
             set;
         }
+        [NotNull]
         public string Zipcode
         {
             get;
