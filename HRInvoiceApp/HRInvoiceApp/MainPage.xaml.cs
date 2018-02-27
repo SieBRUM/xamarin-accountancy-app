@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace HRInvoiceApp
 		public MainPage()
 		{
 			InitializeComponent();
+            SQLiteAsyncConnection db = App.Database.GetInstance();
 		}
 	}
 }
