@@ -7,7 +7,7 @@ namespace HRInvoiceApp.Tables
 {
     public class CostCenterNumbers
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
         public int CostCenterNumber
         {
             get;

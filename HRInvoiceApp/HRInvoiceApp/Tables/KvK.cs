@@ -7,7 +7,7 @@ namespace HRInvoiceApp.Tables
 {
     public class KvK
     {
-        [PrimaryKey,AutoIncrement]
+        [PrimaryKey]
         public int KvKNumber
         {
             get;

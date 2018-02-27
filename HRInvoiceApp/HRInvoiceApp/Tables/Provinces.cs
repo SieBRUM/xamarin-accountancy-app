@@ -7,7 +7,7 @@ namespace HRInvoiceApp.Tables
 {
     public class Provinces
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
         public string Province
         {
             get;
