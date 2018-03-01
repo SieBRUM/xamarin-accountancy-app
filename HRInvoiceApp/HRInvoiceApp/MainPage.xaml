@@ -1,15 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:HRInvoiceApp"
              x:Class="HRInvoiceApp.MainPage">
-    <ContentPage.Content>
-        <ListView x:Name="BanaanListview" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding UserLastName}" Detail="{Binding Designation}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </ContentPage.Content>
-</ContentPage>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="MenuItem1" Order="Primary" Icon="Microsoft.png" Text="Item 1" Priority="0" />
+        <ToolbarItem Name="MenuItem2" Order="Primary" Icon="Xamarin.png" Text="Item 2" Priority="1" />
+    </ContentPage.ToolbarItems>
+    <NavigationPage Title="Opdrachtoverzicht" Icon="Assets/Square150x150Logo.scale-100.png">
+        <x:Arguments>
+            <local:ListPage />
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Title="Maandoverzicht" Icon="Assets/Square150x150Logo.scale-100.png">
+        <x:Arguments>
+            <local:ListPage />
+        </x:Arguments>
+    </NavigationPage>
+    <NavigationPage Title="Instellingen" Icon="schedule.png">
+        <x:Arguments>
+            <local:SettingsPage />
+        </x:Arguments>
+    </NavigationPage>
+</TabbedPage>
