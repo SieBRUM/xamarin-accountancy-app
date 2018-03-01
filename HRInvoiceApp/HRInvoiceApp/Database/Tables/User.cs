@@ -6,35 +6,40 @@ using SQLiteNetExtensions.Attributes;
 
 namespace HRInvoiceApp.Tables
 {
-    public class Users
+    [Table("Users")]
+    public class User
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey, AutoIncrement, NotNull]
         public int UserId
         {
             get;
             set;
         }
-        [ForeignKey(typeof(KvK))]
+        [ForeignKey(typeof(KvK)), NotNull]
         public int KvKNumber
         {
             get;
             set;
         }
+        [NotNull]
         public string UserFirstName
         {
             get;
             set;
         }
+        [NotNull]
         public string UserLastName
         {
             get;
             set;
         }
+        [NotNull]
         public string BankaccountNumber
         {
             get;
             set;
         }
+        [NotNull]
         public int VATNumber
         {
             get;

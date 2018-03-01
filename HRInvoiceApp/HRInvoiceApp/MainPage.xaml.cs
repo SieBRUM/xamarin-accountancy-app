@@ -7,35 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using SQLiteNetExtensions;
 
 namespace HRInvoiceApp
 {
-    public partial class MainPage : ContentPage
-    {
-        SQLiteAsyncConnection db = App.Database.GetInstance();
-
-        public MainPage()
-        {
-            InitializeComponent();
-            db.CreateTableAsync<Users>().Wait();
-            db.InsertAsync(new Users() { UserLastName = "Banaan", UserFirstName = "Bassie" });
-            GetUsers(db);
-
-
+	public partial class MainPage : ContentPage
+	{
+		public MainPage()
+		{
+			InitializeComponent();
+            SQLiteAsyncConnection db = App.Database.GetInstance();
         }
-
-        async void GetUsers(SQLiteAsyncConnection db)
-        {
-            var a = await db.Table<Users>().ToListAsync();
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            ObservableCollection<Users> UserList = new ObservableCollection<Users>();
-            BanaanListview.ItemsSource = UserList;
-
-        }
-    }
+	}
 }

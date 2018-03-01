@@ -2,45 +2,44 @@
 using System.Collections.Generic;
 using System.Text;
 using SQLite;
-using SQLiteNetExtensions.Attributes;
 
 namespace HRInvoiceApp.Tables
 {
-    public class Workdays
+    [Table("Assignments")]
+    public class Assignment
     {
-        [PrimaryKey, AutoIncrement]
-        public int WorkdayId
-        {
-            get;
-            set;
-        }
-        [ForeignKey(typeof(CostCenterNumbers))]
+        [PrimaryKey, NotNull]
         public int CostCenterNumber
         {
             get;
             set;
         }
-        public int WorkedHours
+        [NotNull]
+        public int HourSalary
         {
             get;
             set;
         }
-        public int TraveledDistance
+        [NotNull]
+        public string ClientFirstName
         {
             get;
             set;
         }
-        public int ExtraExpenses
+        [NotNull]
+        public string ClientLastName
         {
             get;
             set;
         }
-        public string note
+        [NotNull]
+        public string ClientEmailAddress
         {
             get;
             set;
         }
-        public DateTime Date
+        [NotNull]
+        public string ClientMobileNumber
         {
             get;
             set;
