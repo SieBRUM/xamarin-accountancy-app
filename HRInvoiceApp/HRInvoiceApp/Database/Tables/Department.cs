@@ -6,25 +6,28 @@ using System.Text;
 
 namespace HRInvoiceApp.Tables
 {
-    public class Departments
+    [Table("Departments")]
+    public class Department
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey, AutoIncrement, NotNull]
         public int DepartmentId
         {
             get;
             set;
         }
-        [ForeignKey(typeof(CostCenterNumbers))]
+        [ForeignKey(typeof(Assignment))]
         public int CostCenterNumber
         {
             get;
             set;
         }
+        [NotNull]
         public string DepartmentName
         {
             get;
             set;
         }
+        [NotNull]
         public int BankaccountNumber
         {
             get;

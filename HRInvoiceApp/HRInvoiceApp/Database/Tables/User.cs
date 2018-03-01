@@ -6,41 +6,46 @@ using SQLiteNetExtensions.Attributes;
 
 namespace HRInvoiceApp.Tables
 {
-    public class Workdays
+    [Table("Users")]
+    public class User
     {
-        [PrimaryKey, AutoIncrement]
-        public int WorkdayId
+        [PrimaryKey, AutoIncrement, NotNull]
+        public int UserId
         {
             get;
             set;
         }
-        [ForeignKey(typeof(CostCenterNumbers))]
-        public int CostCenterNumber
+        [ForeignKey(typeof(KvK)), NotNull]
+        public int KvKNumber
         {
             get;
             set;
         }
-        public int WorkedHours
+        [NotNull]
+        public string UserFirstName
         {
             get;
             set;
         }
-        public int TraveledDistance
+        [NotNull]
+        public string UserLastName
         {
             get;
             set;
         }
-        public int ExtraExpenses
+        [NotNull]
+        public string BankaccountNumber
         {
             get;
             set;
         }
-        public string note
+        [NotNull]
+        public int VATNumber
         {
             get;
             set;
         }
-        public DateTime Date
+        public string Website
         {
             get;
             set;
