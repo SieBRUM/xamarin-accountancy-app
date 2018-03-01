@@ -23,7 +23,7 @@ namespace HRInvoiceApp
         {
             base.OnAppearing();
 
-            BanaanListview.ItemsSource = await db.Table<Users>().ToListAsync();
+            BanaanListview.ItemsSource = await db.Table<User>().ToListAsync();
         }
     }
 }
