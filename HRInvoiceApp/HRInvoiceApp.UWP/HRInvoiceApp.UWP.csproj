@@ -150,7 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="sqlite-net-pcl">
-      <Version>1.4.118</Version>
+      <Version>1.5.166-beta</Version>
     </PackageReference>
     <PackageReference Include="SQLiteNetExtensions">
       <Version>2.0.0</Version>
