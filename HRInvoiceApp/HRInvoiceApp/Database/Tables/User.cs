@@ -45,6 +45,12 @@ namespace HRInvoiceApp.Tables
             get;
             set;
         }
+        [NotNull]
+        public string PhoneNumber
+        {
+            get;
+            set;
+        }
         public string Website
         {
             get;
