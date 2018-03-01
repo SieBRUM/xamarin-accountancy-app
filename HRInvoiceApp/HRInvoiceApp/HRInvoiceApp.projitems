@@ -18,6 +18,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Database\AccountancyDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\IFileHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ListPage.xaml.cs">
+      <DependentUpon>ListPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -28,5 +32,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Database\Tables\Province.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\Tables\User.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Database\Tables\Workday.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)ListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
