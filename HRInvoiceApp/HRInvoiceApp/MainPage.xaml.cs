@@ -16,13 +16,6 @@ namespace HRInvoiceApp
 		{
 			InitializeComponent();
             SQLiteAsyncConnection db = App.Database.GetInstance();
-            db.InsertAsync(new User() { BankaccountNumber = "REEEEE" });
-            getUsers(db);
-        }
-
-        async void getUsers(SQLiteAsyncConnection db)
-        {
-            var a =  await db.Table<User>().ToListAsync();
         }
 	}
 }
