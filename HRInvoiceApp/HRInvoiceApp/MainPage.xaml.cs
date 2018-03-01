@@ -1,10 +1,12 @@
-﻿using SQLite;
+﻿using HRInvoiceApp.Tables;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using SQLiteNetExtensions;
 
 namespace HRInvoiceApp
 {
@@ -14,6 +16,6 @@ namespace HRInvoiceApp
 		{
 			InitializeComponent();
             SQLiteAsyncConnection db = App.Database.GetInstance();
-		}
+        }
 	}
 }

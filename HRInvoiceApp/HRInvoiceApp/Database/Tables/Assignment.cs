@@ -2,50 +2,47 @@
 using System.Collections.Generic;
 using System.Text;
 using SQLite;
-using SQLiteNetExtensions.Attributes;
 
 namespace HRInvoiceApp.Tables
 {
-    public class Users
+    [Table("Assignments")]
+    public class Assignment
     {
-        [PrimaryKey, AutoIncrement]
-        public int UserId
+        [PrimaryKey, NotNull]
+        public int CostCenterNumber
         {
             get;
             set;
         }
-        [ForeignKey(typeof(KvK))]
-        public int KvKNumber
+        [NotNull]
+        public int HourSalary
         {
             get;
             set;
         }
-        public string UserFirstName
+        [NotNull]
+        public string ClientFirstName
         {
             get;
             set;
         }
-        public string UserLastName
+        [NotNull]
+        public string ClientLastName
         {
             get;
             set;
         }
-        public string BankaccountNumber
+        [NotNull]
+        public string ClientEmailAddress
         {
             get;
             set;
         }
-        public int VATNumber
-        {
-            get;
-            set;
-        }
-        public string Website
+        [NotNull]
+        public string ClientMobileNumber
         {
             get;
             set;
         }
     }
-}
-}
 }

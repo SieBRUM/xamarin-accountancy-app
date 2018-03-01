@@ -1,14 +1,15 @@
-﻿using SQLite;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SQLite;
 
 namespace HRInvoiceApp.Tables
 {
-    public class KvK
+    [Table("Provinces")]
+    public class Province
     {
-        [PrimaryKey]
-        public int KvKNumber
+        [PrimaryKey, NotNull]
+        public string ProvinceName
         {
             get;
             set;
