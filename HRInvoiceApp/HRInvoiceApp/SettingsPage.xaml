@@ -3,10 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HRInvoiceApp.SettingsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Settings screen"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout x:Name="settingsStackLayout">
+            <Label Text="Voornaam *"></Label>
+            <Entry x:Name="firstName" Placeholder="Voornaam" Text="{Binding}"></Entry>
+            <Label Text="Achternaam *"></Label>
+            <Entry x:Name="lastName" Placeholder="Achternaam" Text="{Binding Mode=TwoWay}"></Entry>
+            <Label Text="IBAN *"></Label>
+            <Entry x:Name="bankNumber" Placeholder="IBAN" Text="{Binding Mode=TwoWay}"></Entry>
+            <Label Text="Email adres *"></Label>
+            <Entry x:Name="email" Placeholder="Email adres" Text="{Binding Mode=TwoWay}">></Entry>
+            <Label Text="Mobiel nummer *"></Label>
+            <Entry x:Name="mobileNumber" Placeholder="Mobiel nummer" Text="{Binding Mode=TwoWay}"></Entry>
+            <Label Text="BTW nummer *"></Label>
+            <Entry x:Name="vatNumber" Placeholder="BTW nummer" Text="{Binding Mode=TwoWay}"></Entry>
+            <Label Text="KvK nummer *"></Label>
+            <Entry x:Name="kvkNumber" Placeholder="KvK nummer" Text="{Binding Mode=TwoWay}">></Entry>
+            <Label Text="Website"></Label>
+            <Entry x:Name="website" Placeholder="Website" Text="{Binding Mode=TwoWay}"></Entry>
+            <Button Text="Opslaan" Clicked="onSaveClicked"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
