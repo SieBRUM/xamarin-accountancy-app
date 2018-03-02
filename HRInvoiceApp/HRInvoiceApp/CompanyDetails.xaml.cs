@@ -10,12 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace HRInvoiceApp
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SettingsPage : ContentPage
+	public partial class CompanyDetails : ContentPage
 	{
-		public SettingsPage ()
+		public CompanyDetails ()
 		{
 			InitializeComponent ();
-
-        }
+		}
 	}
 }
