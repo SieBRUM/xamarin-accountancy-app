@@ -17,7 +17,9 @@ namespace HRInvoiceApp
         public ListPage ()
 		{
 			InitializeComponent ();
-		}
+            ToolbarItems.Add(new ToolbarItem() { Icon = "Images/addCompany_icon.png", Command = new Command(gotoAssignment)});
+            ToolbarItems.Add(new ToolbarItem() { Icon = "Images/addWorkday_icon.png", Command = new Command(gotoAddCompany)});
+        }
 
         protected async override void OnAppearing()
         {
@@ -25,5 +27,18 @@ namespace HRInvoiceApp
 
             BanaanListview.ItemsSource = await db.Table<User>().ToListAsync();
         }
+        async void gotoAssignment()
+        {
+            var page = new AddAssignment();
+
+            await Navigation.PushModalAsync(page);
+        }
+        async void gotoAddCompany()
+        {
+            var page = new AddCompany();
+
+            await Navigation.PushModalAsync(page);
+        }
+
     }
 }
