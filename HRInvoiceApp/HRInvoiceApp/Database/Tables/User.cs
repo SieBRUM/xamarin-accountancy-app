@@ -40,13 +40,19 @@ namespace HRInvoiceApp.Tables
             set;
         }
         [NotNull]
-        public int VATNumber
+        public string VATNumber
         {
             get;
             set;
         }
         [NotNull]
         public string PhoneNumber
+        {
+            get;
+            set;
+        }
+        [NotNull]
+        public string EmailAddress
         {
             get;
             set;

@@ -18,14 +18,35 @@ namespace HRInvoiceApp
 	{
         SQLiteAsyncConnection db;
         User user;
+        KvK kvk;
 
         public SettingsPage()
 		{
 			InitializeComponent();
             db = App.Database.GetInstance();
-            var getUserTask = db.Table<User>().FirstOrDefaultAsync();
-            Task.WaitAny(getUserTask);
-            user = getUserTask.Result;
+
+            Task.Run(async () =>
+            {
+                user = await db.Table<User>().FirstOrDefaultAsync();
+                if (user != null)
+                {
+                    kvk = await db.Table<KvK>().FirstOrDefaultAsync(x => x.Id == user.KvKNumber);
+                }
+                else
+                {
+                    user = new User();
+                    kvk = new KvK();
+                }
+
+                firstName.BindingContext = user.UserFirstName;
+                bankNumber.BindingContext = user.BankaccountNumber;
+                lastName.BindingContext = user.UserLastName;
+                website.BindingContext = user.Website;
+                mobileNumber.BindingContext = user.PhoneNumber;
+                email.BindingContext = user.EmailAddress;
+                vatNumber.BindingContext = user.VATNumber;
+                kvkNumber.BindingContext = kvk.KvKNumber;
+            });
         }
 
         void onSaveClicked(object sender, EventArgs e)
@@ -58,29 +79,28 @@ namespace HRInvoiceApp
                 DisplayAlert("Alert", "Graag een correct IBAN nummer invullen.", "OK");
                 return;
             }
-
-            if(user != null)
+            if(!ValidateVATNumber(vatNumber.Text))
             {
-                Task<KvK> getKvk = db.Table<KvK>().Where(x => x.KvKNumber == user.KvKNumber).FirstAsync();
-                Task.WaitAny(getKvk);
-                KvK excistingKvk = getKvk.Result;
-                //excistingKvk.KvKNumber = kvkNumber.Text;
+                DisplayAlert("Alert", "Graag een correct BTW nummer invullen.", "OK");
             }
 
-            var insertKvk = db.InsertAsync(new KvK() { KvKNumber = int.Parse(kvkNumber.Text) });
-            Task.WaitAny(insertKvk);
-            var kvk = insertKvk.Result;
-            if(user == null)
+            Task.Run(async () =>
             {
-                user = new User();
-            }
-            user.KvKNumber = kvk;
-            user.BankaccountNumber = bankNumber.Text;
-            user.UserFirstName = firstName.Text;
-            user.UserLastName = lastName.Text;
-            user.VATNumber = int.Parse(vatNumber.Text);
-            user.Website = website.Text;
-            user.PhoneNumber = mobileNumber.Text;
+                kvk.KvKNumber = int.Parse(kvkNumber.Text);
+                await db.InsertOrReplaceAsync(kvk);
+
+                user.KvKNumber = kvk.Id;
+                user.BankaccountNumber = bankNumber.Text;
+                user.EmailAddress = email.Text;
+                user.VATNumber = vatNumber.Text;
+                user.PhoneNumber = mobileNumber.Text;
+                user.UserFirstName = firstName.Text;
+                user.UserLastName = lastName.Text;
+                user.Website = website.Text;
+
+                await db.InsertOrReplaceAsync(user);
+                await DisplayAlert("Succes", "Instellingen succesvol opgeslagen.", "OK");
+            });
         }
 
         public bool IsValidEmail(string emailaddress)
@@ -106,7 +126,9 @@ namespace HRInvoiceApp
         {
             bankNumber = bankNumber.ToUpper();
             if (String.IsNullOrEmpty(bankNumber))
+            {
                 return false;
+            }
             else if (System.Text.RegularExpressions.Regex.IsMatch(bankNumber, "^[A-Z0-9]"))
             {
                 bankNumber = bankNumber.Replace(" ", String.Empty);
@@ -133,7 +155,27 @@ namespace HRInvoiceApp
                 return checksum == 1;
             }
             else
+            {
                 return false;
+            }
+        }
+
+        bool ValidateVATNumber(string VATNumber)
+        {
+            if(String.IsNullOrWhiteSpace(VATNumber))
+            {
+                return false;
+            }
+            if (VATNumber.Count() != 14)
+            {
+                return false;
+            }
+            if(!VATNumber.StartsWith("NL"))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
