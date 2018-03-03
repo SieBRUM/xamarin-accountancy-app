@@ -21,6 +21,9 @@
       <DependentUpon>AddCompany.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)AddDepartment.xaml.cs">
+      <DependentUpon>AddDepartment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -34,6 +37,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Database\AccountancyDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\IFileHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\InputValidationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ListPage.xaml.cs">
       <DependentUpon>ListPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -92,6 +96,11 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)CompanyDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)AddDepartment.xaml">
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

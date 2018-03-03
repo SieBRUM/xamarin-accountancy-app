@@ -17,12 +17,6 @@ namespace HRInvoiceApp.Tables
             get;
             set;
         }
-        [ForeignKey(typeof(Department)), NotNull]
-        public int DepartmentId
-        {
-            get;
-            set;
-        }
         [ForeignKey(typeof(KvK)), NotNull]
         public int KvKNumber
         {
