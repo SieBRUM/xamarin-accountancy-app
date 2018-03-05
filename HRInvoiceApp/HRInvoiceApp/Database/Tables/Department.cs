@@ -15,12 +15,19 @@ namespace HRInvoiceApp.Tables
             get;
             set;
         }
-        [ForeignKey(typeof(Assignment))]
+        [ForeignKey(typeof(Assignment)), NotNull]
         public int CostCenterNumber
         {
             get;
             set;
         }
+        [ForeignKey(typeof(Company)), NotNull]
+        public int CompanyId
+        {
+            get;
+            set;
+        }
+
         [NotNull]
         public string DepartmentName
         {
@@ -28,7 +35,7 @@ namespace HRInvoiceApp.Tables
             set;
         }
         [NotNull]
-        public int BankaccountNumber
+        public string BankaccountNumber
         {
             get;
             set;
