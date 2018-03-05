@@ -7,12 +7,14 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using HRInvoiceApp.Helpers;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace HRInvoiceApp
 {
+
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SettingsPage : ContentPage
 	{
@@ -69,17 +71,17 @@ namespace HRInvoiceApp
                 DisplayAlert("Alert", "Graag een correct KvK nummer invullen.", "OK");
                 return;
             }
-            if (!IsValidEmail(email.Text))
+            if (!InputValidationHelper.IsValidEmail(email.Text))
             {
                 DisplayAlert("Alert", "Graag een correct email adres nummer invullen.", "OK");
                 return;
             }
-            if(!ValidateIban(bankNumber.Text))
+            if(!InputValidationHelper.ValidateIban(bankNumber.Text))
             {
                 DisplayAlert("Alert", "Graag een correct IBAN nummer invullen.", "OK");
                 return;
             }
-            if(!ValidateVATNumber(vatNumber.Text))
+            if(!InputValidationHelper.ValidateVATNumber(vatNumber.Text))
             {
                 DisplayAlert("Alert", "Graag een correct BTW nummer invullen.", "OK");
             }
@@ -101,81 +103,6 @@ namespace HRInvoiceApp
                 await db.InsertOrReplaceAsync(user);
                 await DisplayAlert("Succes", "Instellingen succesvol opgeslagen.", "OK");
             });
-        }
-
-        public bool IsValidEmail(string emailaddress)
-        {
-            if(!emailaddress.Contains("."))
-            {
-                return false;
-            }
-
-            try
-            {
-                MailAddress m = new MailAddress(emailaddress);
-                return true;
-            }
-            catch (FormatException)
-            {
-                return false;
-            }
-        }
-
-        // Ref: https://www.codeproject.com/Tips/775696/IBAN-Validator
-        bool ValidateIban(string bankNumber)
-        {
-            bankNumber = bankNumber.ToUpper();
-            if (String.IsNullOrEmpty(bankNumber))
-            {
-                return false;
-            }
-            else if (System.Text.RegularExpressions.Regex.IsMatch(bankNumber, "^[A-Z0-9]"))
-            {
-                bankNumber = bankNumber.Replace(" ", String.Empty);
-                string bank =
-                bankNumber.Substring(4, bankNumber.Length - 4) + bankNumber.Substring(0, 4);
-                int asciiShift = 55;
-                StringBuilder sb = new StringBuilder();
-                foreach (char c in bank)
-                {
-                    int v;
-                    if (Char.IsLetter(c)) v = c - asciiShift;
-                    else v = int.Parse(c.ToString());
-                    sb.Append(v);
-                }
-                string checkSumString = sb.ToString();
-                int checksum = int.Parse(checkSumString.Substring(0, 1));
-                for (int i = 1; i < checkSumString.Length; i++)
-                {
-                    int v = int.Parse(checkSumString.Substring(i, 1));
-                    checksum *= 10;
-                    checksum += v;
-                    checksum %= 97;
-                }
-                return checksum == 1;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        bool ValidateVATNumber(string VATNumber)
-        {
-            if(String.IsNullOrWhiteSpace(VATNumber))
-            {
-                return false;
-            }
-            if (VATNumber.Count() != 14)
-            {
-                return false;
-            }
-            if(!VATNumber.StartsWith("NL"))
-            {
-                return false;
-            }
-
-            return true;
         }
     }
 }
