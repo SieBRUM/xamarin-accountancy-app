@@ -15,7 +15,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AddAssignment.xaml.cs">
       <DependentUpon>AddAssignment.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)AddCompany.xaml.cs">
       <DependentUpon>AddCompany.xaml</DependentUpon>
@@ -29,7 +28,6 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Assignment_Page.xaml.cs">
       <DependentUpon>Assignment_Page.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)CompanyDetails.xaml.cs">
       <DependentUpon>CompanyDetails.xaml</DependentUpon>
@@ -75,16 +73,9 @@
     <Content Include="$(MSBuildThisFileDirectory)Images\Square44x44Logo.scale-100.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Assignment_Page.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)AddAssignment.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
+    <Content Include="$(MSBuildThisFileDirectory)Images\addCompany_icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Images\addWorkday_icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Images\Square44x44Logo.scale-100.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)AddCompany.xaml">
@@ -100,6 +91,14 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)AddDepartment.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)AddAssignment.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Assignment_Page.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

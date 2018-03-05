@@ -15,10 +15,8 @@ namespace HRInvoiceApp
 
             Children.Add(new NavigationPage(new Assignment_Page {  }) {Title = "Opdrachtoverzicht" });
             Children.Add(new NavigationPage(new ListPage { }) {Title = "Maandoverzicht" });
-            // REMOVE WHEN MERGING
-            // SHOULD BE SETTINGSPAGE (but for fast debugging changed location)
-            //Children.Add(new NavigationPage(new SettingsPage { }) { Title = "Instellingen" });
-            Children.Add(new NavigationPage(new AddDepartment { }) { Title = "Afdeling toevoegen" });
+            Children.Add(new NavigationPage(new SettingsPage { }) {Title = "Instellingen" });
+
         }
     }
 }
