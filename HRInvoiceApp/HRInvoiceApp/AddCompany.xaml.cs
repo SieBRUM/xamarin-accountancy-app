@@ -16,6 +16,11 @@ namespace HRInvoiceApp
 	{
         SQLiteAsyncConnection db;
         Company company;
+        Department department;
+        KvK kvk;
+        Province province;
+        User user;
+
         public AddCompany ()
 		{
 			InitializeComponent ();
@@ -33,6 +38,7 @@ namespace HRInvoiceApp
         {
             Task.Run(async () =>
             {
+
                 company.CompanyName = companyName.Text;
                 company.AddressAddition = AddressAddition.Text;
                 company.City = City.Text;
