@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HRInvoiceApp.Tables;
+using SQLite;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -12,23 +14,18 @@ namespace HRInvoiceApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Assignment_Page : ContentPage
     {
-        public ObservableCollection<string> Items { get; set; }
+        SQLiteAsyncConnection db = App.Database.GetInstance();
 
         public Assignment_Page()
         {
             InitializeComponent();
             ToolbarItems.Add(new ToolbarItem() { Icon = "Images/addCompany_icon.png", Command = new Command(gotoAssignment) });
+        }
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
 
-            Items = new ObservableCollection<string>
-            {
-                "Item 1",
-                "Item 2",
-                "Item 3",
-                "Item 4",
-                "Item 5"
-            };
-			
-			MyListView.ItemsSource = Items;
+            companyListview.ItemsSource = await db.Table<Company>().ToListAsync();
         }
 
         void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -38,7 +35,7 @@ namespace HRInvoiceApp
 
         async void gotoAssignment()
         {
-            var page = new AddAssignment();
+            var page = new AddCompany();
 
             await Navigation.PushModalAsync(page);
         }

@@ -17,8 +17,8 @@ namespace HRInvoiceApp
         public ListPage ()
 		{
 			InitializeComponent ();
-            ToolbarItems.Add(new ToolbarItem() { Icon = "Images/addCompany_icon.png", Command = new Command(gotoAssignment)});
-            ToolbarItems.Add(new ToolbarItem() { Icon = "Images/addWorkday_icon.png", Command = new Command(gotoAddCompany)});
+            ToolbarItems.Add(new ToolbarItem() { Icon = "Images/addCompany_icon.png", Command = new Command(gotoAddCompany)});
+            ToolbarItems.Add(new ToolbarItem() { Icon = "Images/addWorkday_icon.png", Command = new Command(gotoAssignment) });
         }
 
         protected async override void OnAppearing()

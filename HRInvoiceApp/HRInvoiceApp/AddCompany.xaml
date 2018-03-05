@@ -3,10 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HRInvoiceApp.AddCompany">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Toevoegen van een bedrijf"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout x:Name="addCompanyStackLayout">
+            <Label Text="Bedrijfsnaam *"></Label>
+            <Entry x:Name="companyName" Placeholder="Bedrijfsnaam" Text="{Binding}"></Entry>
+            <Label Text="Adres toevoeging *"></Label>
+            <Entry x:Name="AddressAddition" Placeholder="Adres toevoeging" Text="{Binding}"></Entry>
+            <Label Text="Stad *"></Label>
+            <Entry x:Name="City" Placeholder="Stad" Text="{Binding}"></Entry>
+            <Label Text="Postcode *"></Label>
+            <Entry x:Name="ZipCode" Placeholder="Postcode" Text="{Binding}"></Entry>
+            <Button x:Name="saveButton"  Text="Opslaan" Clicked="saveCompany"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
