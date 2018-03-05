@@ -16,6 +16,12 @@ namespace HRInvoiceApp
 	{
         SQLiteAsyncConnection db;
         Company company;
+
+        Department department;
+        KvK kvk;
+        Province province;
+        User user;
+        
         public AddCompany ()
 		{
 			InitializeComponent ();
