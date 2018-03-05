@@ -68,16 +68,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Images\addCompany_icon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Images\addWorkday_icon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Images\Square44x44Logo.scale-100.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Images\addCompany_icon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Images\addWorkday_icon.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Images\Square44x44Logo.scale-100.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)AddCompany.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -101,5 +91,10 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Assignment_Page.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Images\addCompany_icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Images\addWorkday_icon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Images\Square44x44Logo.scale-100.png" />
   </ItemGroup>
 </Project>
