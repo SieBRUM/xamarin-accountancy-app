@@ -18,7 +18,6 @@ namespace HRInvoiceApp
         SQLiteAsyncConnection db;
         Company company;
 
-        Department department;
         KvK kvk;
         List<Province> provinces;
         User user;
@@ -35,19 +34,19 @@ namespace HRInvoiceApp
                 provinces = await db.Table<Province>().ToListAsync();
                 if(provinces.Count == 0)
                 {
-                    // Error handling
+                    await DisplayAlert("Alert", "Er zijn geen provincies beschikbaar", "OK");
+                    return;
                 }
 
                 if(user == null)
                 {
                     await DisplayAlert("Alert", "Voeg eerst een gebruiker toe.", "OK");
-                    var modalPage = new SettingsPage();
-                    await Navigation.PushModalAsync(modalPage);
+                    //var modalPage = new SettingsPage();
+                    //await Navigation.PushModalAsync(modalPage);
                     return;
                 }
-                company = new Company();
                 kvk = new KvK();
-
+                company = new Company();
                 ProvincePicker.ItemsSource = provinces;
 
             });
@@ -58,9 +57,8 @@ namespace HRInvoiceApp
         {
             foreach (var view in addCompanyStackLayout.Children)
             {
-                if (view is Entry)
+                if (view is Entry entry)
                 {
-                    Entry entry = (Entry)view;
                     if (string.IsNullOrWhiteSpace(entry.Text) && entry.Placeholder.Contains("*"))
                     {
                         DisplayAlert("Alert", "Graag alle velden met een * invullen.", "OK");
@@ -78,7 +76,7 @@ namespace HRInvoiceApp
                 DisplayAlert("Alert", "Graag een provincie invullen.", "OK");
                 return;
             }
-            if (ZipCode.Text.Count() != 6)
+            if (ZipCode.Text.Contains(" ") && ZipCode.Text.Count() == 6)
             {
                 DisplayAlert("Alert", "Graag een postcode invullen.", "OK");
                 return;
@@ -87,9 +85,8 @@ namespace HRInvoiceApp
             Task.Run(async () =>
             {
                 kvk.KvKNumber = int.Parse(KvKNumber.Text);
-                var kvkId = await db.InsertAsync(kvk);
-                
-                company.KvkId = kvkId;
+
+                company.KvkId = kvk.Id;
                 company.Province = ((Province)ProvincePicker.SelectedItem).ProvinceName;
                 company.UserId = user.UserId;
                 company.CompanyName = companyName.Text;
@@ -98,7 +95,7 @@ namespace HRInvoiceApp
                 company.City = City.Text;
                 company.Zipcode = ZipCode.Text;
 
-                await db.InsertOrReplaceAsync(company);
+                await db.InsertAsync(company);
                 await DisplayAlert("Succes", "Instellingen succesvol opgeslagen.", "OK");
             });
         }
