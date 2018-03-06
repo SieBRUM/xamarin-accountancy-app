@@ -19,21 +19,22 @@ namespace HRInvoiceApp
         public Assignment_Page()
         {
             InitializeComponent();
-            ToolbarItems.Add(new ToolbarItem() { Icon = "Images/addCompany_icon.png", Command = new Command(gotoAssignment) });
+            ToolbarItems.Add(new ToolbarItem() { Icon = "Images/addCompany_icon.png", Command = new Command(gotoAddCompany) });
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
 
             companyListview.ItemsSource = await db.Table<Company>().ToListAsync();
+            companyListview.ItemTapped += CompanyListview_ItemTapped;
         }
 
-        void Handle_ItemTapped(object sender, ItemTappedEventArgs e)
+        private void CompanyListview_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            gotoDetails();   
+            gotoDetails();
         }
 
-        async void gotoAssignment()
+        async void gotoAddCompany()
         {
             var page = new AddCompany();
 
@@ -42,7 +43,7 @@ namespace HRInvoiceApp
 
         async void gotoDetails()
         {
-            var page = new CompanyDetails();
+            var page = new AddCompany();
 
             await Navigation.PushModalAsync(page);
         }

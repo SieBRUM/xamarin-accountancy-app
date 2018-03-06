@@ -67,19 +67,22 @@ namespace HRInvoiceApp
                         return;
                     }
                 }
+                else if(view is Picker picker)
+                {
+                    if(picker.SelectedItem == null)
+                    {
+                        DisplayAlert("Alert", "Graag een provincie invullen.", "OK");
+                        return;
+                    }
+                }
             }
             if (KvKNumber.Text.Count() != 8 || !int.TryParse(KvKNumber.Text, out int result))
             {
                 DisplayAlert("Alert", "Graag een correct KvK nummer invullen.", "OK");
                 return;
             }
-            if (ProvincePicker.SelectedItem == null)
-            {
-                DisplayAlert("Alert", "Graag een provincie invullen.", "OK");
-                return;
-            }
 
-            if(InputValidationHelper.IsZipCodeValid(ZipCode.Text))
+            if(!InputValidationHelper.IsZipCodeValid(ZipCode.Text))
             {
                 DisplayAlert("Alert", "Graag een geldige postcode invullen.", "OK");
                 return;
@@ -88,6 +91,14 @@ namespace HRInvoiceApp
             Task.Run(async () =>
             {
                 kvk.KvKNumber = int.Parse(KvKNumber.Text);
+                if(kvk.Id == 0)
+                {
+                    await db.InsertAsync(kvk);
+                }
+                else
+                {
+                    await db.UpdateAsync(kvk);
+                }
 
                 company.KvkId = kvk.Id;
                 company.Province = ((Province)ProvincePicker.SelectedItem).ProvinceName;
@@ -97,8 +108,14 @@ namespace HRInvoiceApp
                 company.AddressAddition = AddressAddition.Text;
                 company.City = City.Text;
                 company.Zipcode = ZipCode.Text;
-
-                await db.InsertAsync(company);
+                if(company.CompanyId == 0)
+                {
+                    await db.InsertAsync(company);
+                }
+                else
+                {
+                    await db.UpdateAsync(company);
+                }
                 await DisplayAlert("Succes", "Instellingen succesvol opgeslagen.", "OK");
             });
         }
