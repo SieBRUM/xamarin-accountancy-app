@@ -88,7 +88,15 @@ namespace HRInvoiceApp
             Task.Run(async () =>
             {
                 kvk.KvKNumber = int.Parse(kvkNumber.Text);
-                await db.InsertOrReplaceAsync(kvk);
+
+                if (kvk.Id == 0)
+                {
+                    await db.InsertAsync(kvk);
+                }
+                else
+                {
+                    await db.UpdateAsync(kvk);
+                }
 
                 user.KvKId = kvk.Id;
                 user.BankaccountNumber = bankNumber.Text;
@@ -99,7 +107,14 @@ namespace HRInvoiceApp
                 user.UserLastName = lastName.Text;
                 user.Website = website.Text;
 
-                await db.InsertOrReplaceAsync(user);
+                if(user.UserId == 0)
+                {
+                    await db.InsertAsync(user);
+                }
+                else
+                {
+                    await db.UpdateAsync(user);
+                }
                 await DisplayAlert("Succes", "Instellingen succesvol opgeslagen.", "OK");
             });
         }
