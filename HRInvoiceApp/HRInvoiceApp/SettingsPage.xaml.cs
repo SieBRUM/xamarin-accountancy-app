@@ -32,7 +32,7 @@ namespace HRInvoiceApp
                 user = await db.Table<User>().FirstOrDefaultAsync();
                 if (user != null)
                 {
-                    kvk = await db.Table<KvK>().FirstOrDefaultAsync(x => x.Id == user.KvKNumber);
+                    kvk = await db.Table<KvK>().FirstOrDefaultAsync(x => x.Id == user.KvKId);
                 }
                 else
                 {
@@ -91,7 +91,7 @@ namespace HRInvoiceApp
                 kvk.KvKNumber = int.Parse(kvkNumber.Text);
                 await db.InsertOrReplaceAsync(kvk);
 
-                user.KvKNumber = kvk.Id;
+                user.KvKId = kvk.Id;
                 user.BankaccountNumber = bankNumber.Text;
                 user.EmailAddress = email.Text;
                 user.VATNumber = vatNumber.Text;

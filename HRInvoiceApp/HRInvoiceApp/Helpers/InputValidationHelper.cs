@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace HRInvoiceApp.Helpers
 {
@@ -81,6 +82,20 @@ namespace HRInvoiceApp.Helpers
                 return true;
             }
             catch (FormatException)
+            {
+                return false;
+            }
+        }
+
+        public static bool IsZipCodeValid(string zipcode)
+        {
+            string AllowedChars = @"^[1-9][0-9]{3}\s?[a-zA-Z]{2}$";
+
+            if (Regex.IsMatch(zipcode, AllowedChars))
+            {
+                return true;
+            }
+            else
             {
                 return false;
             }

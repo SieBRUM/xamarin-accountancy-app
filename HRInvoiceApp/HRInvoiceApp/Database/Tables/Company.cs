@@ -18,7 +18,7 @@ namespace HRInvoiceApp.Tables
             set;
         }
         [ForeignKey(typeof(KvK)), NotNull]
-        public int KvKNumber
+        public int KvkId
         {
             get;
             set;
@@ -37,6 +37,12 @@ namespace HRInvoiceApp.Tables
         }
         [NotNull]
         public string CompanyName
+        {
+            get;
+            set;
+        }
+        [NotNull]
+        public string Address
         {
             get;
             set;
