@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Windows.UI.Core;
 using Xamarin.Forms;
@@ -22,6 +23,7 @@ namespace HRInvoiceApp
         List<Province> provinces;
         User user;
         
+
         public AddCompany()
 		{
 			InitializeComponent();
@@ -76,11 +78,12 @@ namespace HRInvoiceApp
                 DisplayAlert("Alert", "Graag een provincie invullen.", "OK");
                 return;
             }
-            if (ZipCode.Text.Contains(" ") && ZipCode.Text.Count() == 6)
+
+            if(InputValidationHelper.IsZipCodeValid(ZipCode.Text))
             {
-                DisplayAlert("Alert", "Graag een postcode invullen.", "OK");
+                DisplayAlert("Alert", "Graag een geldige postcode invullen.", "OK");
                 return;
-            }            
+            }
 
             Task.Run(async () =>
             {
