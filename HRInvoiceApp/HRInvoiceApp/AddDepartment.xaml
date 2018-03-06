@@ -5,13 +5,13 @@
     <ContentPage.Content>
         <StackLayout x:Name="addDepartmentStack">
             <Label Text="Selecteer een bedrijf *"></Label>
-            <Picker x:Name="companyPicker" ItemDisplayBinding="{Binding CompanyName}"></Picker>
+            <Picker x:Name="companyPicker" ItemDisplayBinding="{Binding CompanyName}" SelectedIndexChanged="OnSelectedCompanyChanged"></Picker>
             <Label Text="Kostenplaatsnummer *"></Label>
-            <Entry Placeholder="Kostenplaatsnummer" x:Name="addDepartmentCostCenterNumber"></Entry>
+            <Entry Placeholder="Kostenplaatsnummer *" x:Name="addDepartmentCostCenterNumber"></Entry>
             <Label Text="Afdelingsnaam *"></Label>
             <Entry Placeholder="Afdelingsnaam *" x:Name="addDepartmentDepartmentName"></Entry>
             <Label Text="Bankrekeningnummer *"></Label>
-            <Entry Placeholder="Bankrekeningnummer" x:Name="addDepartmentBankNumber"></Entry>
+            <Entry Placeholder="Bankrekeningnummer *" x:Name="addDepartmentBankNumber"></Entry>
             <Button Text="Opslaan" Clicked="SaveDepartment"></Button>
         </StackLayout>
     </ContentPage.Content>

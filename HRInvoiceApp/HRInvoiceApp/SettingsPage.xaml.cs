@@ -32,7 +32,7 @@ namespace HRInvoiceApp
                 user = await db.Table<User>().FirstOrDefaultAsync();
                 if (user != null)
                 {
-                    kvk = await db.Table<KvK>().FirstOrDefaultAsync(x => x.Id == user.KvKNumber);
+                    kvk = await db.Table<KvK>().FirstOrDefaultAsync(x => x.Id == user.KvKId);
                 }
                 else
                 {
@@ -55,10 +55,9 @@ namespace HRInvoiceApp
         {
             foreach (var view in settingsStackLayout.Children)
             {
-                if(view is Entry)
+                if(view is Entry entry)
                 {
-                    Entry entry = (Entry)view;
-                    if(entry.Placeholder != "Website" && string.IsNullOrWhiteSpace(entry.Text))
+                    if(entry.Placeholder.Contains("*") && string.IsNullOrWhiteSpace(entry.Text))
                     {
                         DisplayAlert("Alert", "Graag alle velden met een * invullen.", "OK");
                         return;
@@ -91,7 +90,7 @@ namespace HRInvoiceApp
                 kvk.KvKNumber = int.Parse(kvkNumber.Text);
                 await db.InsertOrReplaceAsync(kvk);
 
-                user.KvKNumber = kvk.Id;
+                user.KvKId = kvk.Id;
                 user.BankaccountNumber = bankNumber.Text;
                 user.EmailAddress = email.Text;
                 user.VATNumber = vatNumber.Text;
