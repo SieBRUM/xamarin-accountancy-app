@@ -1,4 +1,5 @@
-﻿using HRInvoiceApp.Tables;
+﻿using HRInvoiceApp.Helpers;
+using HRInvoiceApp.Tables;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -60,13 +61,29 @@ namespace HRInvoiceApp
                 if (view is Entry)
                 {
                     Entry entry = (Entry)view;
-                    if (string.IsNullOrWhiteSpace(entry.Text))
+                    if (string.IsNullOrWhiteSpace(entry.Text) && entry.Placeholder.Contains("*"))
                     {
                         DisplayAlert("Alert", "Graag alle velden met een * invullen.", "OK");
                         return;
                     }
                 }
             }
+            if (KvKNumber.Text.Count() != 8 || !int.TryParse(KvKNumber.Text, out int result))
+            {
+                DisplayAlert("Alert", "Graag een correct KvK nummer invullen.", "OK");
+                return;
+            }
+            if (ProvincePicker.SelectedItem == null)
+            {
+                DisplayAlert("Alert", "Graag een provincie invullen.", "OK");
+                return;
+            }
+            if (ZipCode.Text.Count() != 6)
+            {
+                DisplayAlert("Alert", "Graag een postcode invullen.", "OK");
+                return;
+            }            
+
             Task.Run(async () =>
             {
                 kvk.KvKNumber = int.Parse(KvKNumber.Text);
