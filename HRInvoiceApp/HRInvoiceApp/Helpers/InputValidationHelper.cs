@@ -89,7 +89,7 @@ namespace HRInvoiceApp.Helpers
 
         public static bool IsZipCodeValid(string zipcode)
         {
-            String AllowedChars = @"^[1-9][0-9]{3}\s?[a-zA-Z]{2}$";
+            string AllowedChars = @"^[1-9][0-9]{3}\s?[a-zA-Z]{2}$";
 
             if (Regex.IsMatch(zipcode, AllowedChars))
             {

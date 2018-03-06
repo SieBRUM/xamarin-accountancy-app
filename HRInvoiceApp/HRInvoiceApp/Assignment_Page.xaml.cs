@@ -31,17 +31,11 @@ namespace HRInvoiceApp
 
         private void CompanyListview_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            gotoDetails();
+            //to be implemented
+            gotoAddCompany();
         }
 
         async void gotoAddCompany()
-        {
-            var page = new AddCompany();
-
-            await Navigation.PushModalAsync(page);
-        }
-
-        async void gotoDetails()
         {
             var page = new AddCompany();
 
