@@ -55,10 +55,9 @@ namespace HRInvoiceApp
         {
             foreach (var view in settingsStackLayout.Children)
             {
-                if(view is Entry)
+                if(view is Entry entry)
                 {
-                    Entry entry = (Entry)view;
-                    if(entry.Placeholder != "Website" && string.IsNullOrWhiteSpace(entry.Text))
+                    if(entry.Placeholder.Contains("*") && string.IsNullOrWhiteSpace(entry.Text))
                     {
                         DisplayAlert("Alert", "Graag alle velden met een * invullen.", "OK");
                         return;
@@ -89,7 +88,15 @@ namespace HRInvoiceApp
             Task.Run(async () =>
             {
                 kvk.KvKNumber = int.Parse(kvkNumber.Text);
-                await db.InsertOrReplaceAsync(kvk);
+
+                if (kvk.Id == 0)
+                {
+                    await db.InsertAsync(kvk);
+                }
+                else
+                {
+                    await db.UpdateAsync(kvk);
+                }
 
                 user.KvKId = kvk.Id;
                 user.BankaccountNumber = bankNumber.Text;
@@ -100,7 +107,15 @@ namespace HRInvoiceApp
                 user.UserLastName = lastName.Text;
                 user.Website = website.Text;
 
-                await db.InsertOrReplaceAsync(user);
+                if(user.UserId == 0)
+                {
+                    await db.InsertAsync(user);
+                }
+                else
+                {
+                    await db.UpdateAsync(user);
+                }
+
                 await DisplayAlert("Succes", "Instellingen succesvol opgeslagen.", "OK");
             });
         }
