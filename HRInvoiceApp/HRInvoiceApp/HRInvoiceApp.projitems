@@ -70,16 +70,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)AddDepartment.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)AddDepartment.xaml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)AddAssignment.xaml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -91,5 +81,10 @@
     <Content Include="$(MSBuildThisFileDirectory)Images\addCompany_icon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Images\addWorkday_icon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Images\Square44x44Logo.scale-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)AddDepartment.xaml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
