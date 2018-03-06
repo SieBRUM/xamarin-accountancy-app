@@ -51,6 +51,7 @@ namespace HRInvoiceApp
                 ProvincePicker.ItemsSource = provinces;
 
             });
+
         }
 
         void saveCompany(object sender, EventArgs e)
@@ -97,7 +98,6 @@ namespace HRInvoiceApp
                 {
                     await db.UpdateAsync(kvk);
                 }
-
                 company.KvKId = kvk.Id;
                 company.Province = ((Province)ProvincePicker.SelectedItem).ProvinceName;
                 company.UserId = user.UserId;
