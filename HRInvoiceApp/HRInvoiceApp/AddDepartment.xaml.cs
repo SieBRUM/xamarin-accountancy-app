@@ -17,7 +17,6 @@ namespace HRInvoiceApp
         List<Company> companies;
         Company selectedCompany;
         Department department;
-
 		public AddDepartment()
 		{
 			InitializeComponent();
@@ -61,7 +60,7 @@ namespace HRInvoiceApp
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
+            
             Task.Run(async () =>
             {
                 companies = await db.Table<Company>().ToListAsync();
@@ -71,7 +70,6 @@ namespace HRInvoiceApp
                     bool doNavigate = await DisplayAlert("Alert", "U moet eerst een bedrijf toevoegen voordat u een afdelding toe kan voegen. Wilt u naar 'Bedrijf toevoegen' gaan?", "Ja", "Nee");
                     if (doNavigate)
                     {
-                        // Werkt nogsteeds niet :(
                         //await Navigation.PushModalAsync(new AddCompany());
                     }
                     return;

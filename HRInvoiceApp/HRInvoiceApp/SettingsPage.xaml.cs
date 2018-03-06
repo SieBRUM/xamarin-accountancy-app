@@ -115,6 +115,7 @@ namespace HRInvoiceApp
                 {
                     await db.UpdateAsync(user);
                 }
+
                 await DisplayAlert("Succes", "Instellingen succesvol opgeslagen.", "OK");
             });
         }

@@ -41,6 +41,12 @@ namespace HRInvoiceApp.Tables
             get;
             set;
         }
+        [NotNull]
+        public string Address
+        {
+            get;
+            set;
+        }
         public string AddressAddition
         {
             get;

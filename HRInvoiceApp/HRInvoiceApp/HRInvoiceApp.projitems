@@ -29,10 +29,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Assignment_Page.xaml.cs">
       <DependentUpon>Assignment_Page.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)CompanyDetails.xaml.cs">
-      <DependentUpon>CompanyDetails.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Database\AccountancyDatabase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\IFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\InputValidationHelper.cs" />
@@ -74,9 +70,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)CompanyDetails.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)AddDepartment.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
