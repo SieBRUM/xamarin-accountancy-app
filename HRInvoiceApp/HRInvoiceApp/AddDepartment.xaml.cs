@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using HRInvoiceApp.Helpers;
 using HRInvoiceApp.Tables;
@@ -16,43 +15,71 @@ namespace HRInvoiceApp
 	{
         SQLiteAsyncConnection db;
         List<Company> companies;
+        Company selectedCompany;
+        Department department;
 		public AddDepartment()
 		{
 			InitializeComponent();
             db = App.Database.GetInstance();
+            department = new Department();
 		}
 
         // For page open
         public AddDepartment(Company preselectedCompany)
         {
-
+            InitializeComponent();
+            db = App.Database.GetInstance();
+            department = new Department() { CompanyId = preselectedCompany.CompanyId };
+            selectedCompany = preselectedCompany;
         }
 
         // For edit department purposes
-        public AddDepartment(Department department)
+        public AddDepartment(int departmentId)
         {
+            InitializeComponent();
+            db = App.Database.GetInstance();
+            Task.Run(async () =>
+            {
+                department = await db.Table<Department>().FirstOrDefaultAsync(x => x.DepartmentId == departmentId);
 
+                // Wat doen we als app hier in komt hier? (zou niet mogelijk moeten zijn)
+                if(department == null)
+                {
+                    await DisplayAlert("Alert", "Meegestuurde department staat niet in de database.", "Ok");
+                    await Navigation.PopToRootAsync();
+                    return;
+                }
+                selectedCompany = await db.Table<Company>().FirstOrDefaultAsync(x => x.CompanyId == department.CompanyId);
+                addDepartmentBankNumber.Text = department.BankaccountNumber;
+                addDepartmentCostCenterNumber.Text = department.CostCenterNumber.ToString();
+                addDepartmentDepartmentName.Text = department.DepartmentName;
+            });
         }
 
-        // Override OnAppearing function so alert appeares when Page is opened
+        // Override OnAppearing function so alert appears when Page is opened
         protected override void OnAppearing()
         {
+            base.OnAppearing();
+            
             Task.Run(async () =>
             {
                 companies = await db.Table<Company>().ToListAsync();
 
-                if (companies.Count() == 0)
+                if(companies.Count() == 0)
                 {
                     bool doNavigate = await DisplayAlert("Alert", "U moet eerst een bedrijf toevoegen voordat u een afdelding toe kan voegen. Wilt u naar 'Bedrijf toevoegen' gaan?", "Ja", "Nee");
                     if (doNavigate)
                     {
-                        // Seems to crash eyyy
                         //await Navigation.PushModalAsync(new AddCompany());
                     }
                     return;
                 }
 
                 companyPicker.ItemsSource = companies;
+                if(selectedCompany != null)
+                {
+                    companyPicker.SelectedIndex = companies.FindIndex(x => x.CompanyId == selectedCompany.CompanyId);
+                }
             });
         }
 
@@ -61,18 +88,16 @@ namespace HRInvoiceApp
             // Check of alle velden ingevuld zijn
             foreach (var element in addDepartmentStack.Children)
             {
-                if(element is Entry)
+                if(element is Entry entry)
                 {
-                    Entry entry = (Entry)element;
-                    if(String.IsNullOrWhiteSpace(entry.Text))
+                    if(String.IsNullOrWhiteSpace(entry.Text) && entry.Placeholder.Contains("*"))
                     {
                         DisplayAlert("Alert", "Graag alle velden met een * invullen", "Ok");
                         return;
                     }
                 }
-                if(element is Picker)
+                if(element is Picker picker)
                 {
-                    Picker picker = (Picker)element;
                     if(picker.SelectedItem == null)
                     {
                         DisplayAlert("Alert", "Graag een bedrijf selecteren", "Ok");
@@ -87,27 +112,39 @@ namespace HRInvoiceApp
                 return;
             }
 
-            // Still needs input checks!!
-            Company selectedComapny = (Company)companyPicker.SelectedItem;
-
-            Department department = new Department()
+            if(!int.TryParse(addDepartmentCostCenterNumber.Text, out int result))
             {
-                BankaccountNumber = addDepartmentBankNumber.Text,
-                CompanyId = selectedComapny.CompanyId,
-                DepartmentName = addDepartmentDepartmentName.Text,
-                CostCenterNumber = int.Parse(addDepartmentCostCenterNumber.Text)
-            };
+                DisplayAlert("Alert", "Graag een correcte Kostenplaatsnummer invullen", "Ok");
+                return;
+            }
+
+            department.BankaccountNumber = addDepartmentBankNumber.Text;
+            department.CompanyId = selectedCompany.CompanyId;
+            department.DepartmentName = addDepartmentDepartmentName.Text;
+            department.CostCenterNumber = int.Parse(addDepartmentCostCenterNumber.Text);
 
             Task.Run(async () =>
             {
-                // Ask open page to add assignment, if so, prefill form based on Id below..
-                int departmentId = await db.InsertOrReplaceAsync(department);
+                // If id is 0, it's a new entry...
+                if(department.DepartmentId == 0)
+                {
+                    await db.InsertAsync(department);
+                }
+                else
+                {
+                   await db.UpdateAsync(department);
+                }
                 bool openAddAssignment = await DisplayAlert("Succes", "Afdeling succesvol toegevoegd. Wilt u een opdracht toevoegen?", "Ja", "Nee");
                 if(openAddAssignment)
                 {
-                    // Start page, add non-defauled constructor.
+                    // Open page...
                 }
             });
         }
-	}
+
+        private void OnSelectedCompanyChanged(object sender, EventArgs e)
+        {
+            selectedCompany = companies[companyPicker.SelectedIndex];
+        }
+    }
 }

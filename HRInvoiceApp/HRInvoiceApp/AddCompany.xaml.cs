@@ -18,7 +18,6 @@ namespace HRInvoiceApp
 	{
         SQLiteAsyncConnection db;
         Company company;
-
         KvK kvk;
         List<Province> provinces;
         User user;
@@ -99,8 +98,7 @@ namespace HRInvoiceApp
                 {
                     await db.UpdateAsync(kvk);
                 }
-
-                company.KvkId = kvk.Id;
+                company.KvKId = kvk.Id;
                 company.Province = ((Province)ProvincePicker.SelectedItem).ProvinceName;
                 company.UserId = user.UserId;
                 company.CompanyName = companyName.Text;
