@@ -3,10 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HRInvoiceApp.AddAssignment">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Toevoegen opdracht"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout x:Name="addAssignmentLayout">
+            <Label Text="Afdeling"></Label>
+            <Picker x:Name="departmentPicker" ItemDisplayBinding="{Binding DepartmentName}" SelectedIndexChanged="OnSelectedDepartmentChanged"></Picker>
+            <Label Text="Kostenplaatsnummer *"></Label>
+            <Entry x:Name="addAssignmentCostCenterNumer" Placeholder="Kostenplaatsnummer *"></Entry>
+            <Label Text="Uursalaris *"></Label>
+            <Entry x:Name="addAssignmentHourSalary" Placeholder="Uursalaris *"></Entry>
+            <Label Text="Voornaam opdrachtgever *"></Label>
+            <Entry x:Name="addAssignmentClientFirstName" Placeholder="Voornaam opdrachtgever *"></Entry>
+            <Label Text="Achternaam opdrachtgever *"></Label>
+            <Entry x:Name="addAssignmentClientLastName" Placeholder="Achternaam opdrachtgever *"></Entry>
+            <Label Text="Emailadres opdrachtgever *"></Label>
+            <Entry x:Name="addAssignmentClientEmail" Placeholder="Emailadres opdrachtgever *"></Entry>
+            <Label Text="Telefoonnummer opdrachtgever *"></Label>
+            <Entry x:Name="addAssignmentClientMobileNumber" Placeholder="Telefoonnummer opdrachtgever *"></Entry>
+            <Button Text="Opslaan" Clicked="SaveAssignment"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
