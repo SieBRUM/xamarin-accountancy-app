@@ -11,6 +11,7 @@ using HRInvoiceApp.Helpers;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Text.RegularExpressions;
 
 namespace HRInvoiceApp
 {
@@ -85,9 +86,16 @@ namespace HRInvoiceApp
                 DisplayAlert("Alert", "Graag een correct BTW nummer invullen.", "OK");
             }
 
+            if (Regex.IsMatch(mobileNumber.Text, @"[a-zA-Z]"))
+            {
+                DisplayAlert("Alert", "Graag een correct telefoonnnummer invoeren", "Ok");
+                return;
+            }
+
             Task.Run(async () =>
             {
                 kvk.KvKNumber = int.Parse(kvkNumber.Text);
+
                 if (kvk.Id == 0)
                 {
                     await db.InsertAsync(kvk);
@@ -96,6 +104,7 @@ namespace HRInvoiceApp
                 {
                     await db.UpdateAsync(kvk);
                 }
+
                 user.KvKId = kvk.Id;
                 user.BankaccountNumber = bankNumber.Text;
                 user.EmailAddress = email.Text;
