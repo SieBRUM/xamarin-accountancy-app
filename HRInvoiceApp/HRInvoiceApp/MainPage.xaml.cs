@@ -16,8 +16,6 @@ namespace HRInvoiceApp
             Children.Add(new NavigationPage(new Assignment_Page {  }) {Title = "Opdrachtoverzicht" });
             Children.Add(new NavigationPage(new ListPage { }) {Title = "Maandoverzicht" });
             Children.Add(new NavigationPage(new SettingsPage { }) {Title = "Instellingen" });
-            Children.Add(new NavigationPage(new AddAssignment { }) {Title = "Add assigment" });
-
         }
     }
 }
