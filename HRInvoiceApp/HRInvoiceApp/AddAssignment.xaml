@@ -4,8 +4,10 @@
              x:Class="HRInvoiceApp.AddAssignment">
     <ContentPage.Content>
         <StackLayout x:Name="addAssignmentLayout">
-            <Label Text="Afdeling"></Label>
-            <Picker x:Name="departmentPicker" ItemDisplayBinding="{Binding DepartmentName}" SelectedIndexChanged="OnSelectedDepartmentChanged"></Picker>
+            <Label Text="Bedrijf *"></Label>
+            <Picker x:Name="addAssignmentCompanyPicker" ItemDisplayBinding="{Binding CompanyName}" SelectedIndexChanged="OnSelectedCompanyChanged"></Picker>
+            <Label Text="Afdeling *"></Label>
+            <Picker x:Name="addAssignmentDepartmentPicker" ItemDisplayBinding="{Binding DepartmentName}" SelectedIndexChanged="OnSelectedDepartmentChanged"></Picker>
             <Label Text="Kostenplaatsnummer *"></Label>
             <Entry x:Name="addAssignmentCostCenterNumer" Placeholder="Kostenplaatsnummer *"></Entry>
             <Label Text="Uursalaris *"></Label>

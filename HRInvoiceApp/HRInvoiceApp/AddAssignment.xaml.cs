@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI.Core;
 using Xamarin.Forms;
@@ -19,7 +20,9 @@ namespace HRInvoiceApp
         Assignment assignment;
         SQLiteAsyncConnection db;
         List<Department> departments;
+        List<Company> companies;
         Department selectedDepartment;
+        Company selectedCompany;
 
 		public AddAssignment()
 		{
@@ -45,7 +48,6 @@ namespace HRInvoiceApp
             {
                 assignment = await db.Table<Assignment>().FirstOrDefaultAsync(x => x.CostCenterNumber == CostCenterNumber);
 
-                // Wat doen we als app hier in komt hier? (zou niet mogelijk moeten zijn)
                 if (assignment == null)
                 {
                     await DisplayAlert("Alert", "Meegestuurde assignment staat niet in de database.", "Ok");
@@ -53,7 +55,7 @@ namespace HRInvoiceApp
                     await Navigation.PopToRootAsync();
                     return;
                 }
-                selectedDepartment = await db.Table<Department>().FirstOrDefaultAsync(x => x.CompanyId == assignment.DepartmentId);
+                selectedDepartment = await db.Table<Department>().FirstOrDefaultAsync(x => x.DepartmentId == assignment.DepartmentId);
 
                 addAssignmentClientEmail.Text = assignment.ClientEmailAddress;
                 addAssignmentClientFirstName.Text = assignment.ClientFirstName;
@@ -70,24 +72,17 @@ namespace HRInvoiceApp
 
             Task.Run(async () =>
             {
-                departments = await db.Table<Department>().ToListAsync();
+                companies = await db.Table<Company>().ToListAsync();
+                addAssignmentCompanyPicker.ItemsSource = companies;
 
-                if(departments.Count == 0)
+                if (selectedDepartment != null)
                 {
-                    bool doNavigate = await DisplayAlert("Alert", "U moet eerst een afdeling toevoegen voordat u een opdracht toe kan voegen. Wilt u naar 'Afdeling toevoegen' gaan?", "Ja", "Nee");
-                    if (doNavigate)
-                    {
-                        // Do some navigating
-                    }
-                    return;
+                    addAssignmentCompanyPicker.SelectedIndex = companies.FindIndex(x => x.CompanyId == selectedDepartment.CompanyId);
+                    selectedCompany = companies.Where(x => x.CompanyId == selectedDepartment.CompanyId).FirstOrDefault();
+                    departments = await db.Table<Department>().Where(x => x.CompanyId == selectedCompany.CompanyId).ToListAsync();
+                    addAssignmentDepartmentPicker.ItemsSource = departments;
+                    addAssignmentDepartmentPicker.SelectedIndex = departments.FindIndex(x => x.DepartmentId == selectedDepartment.DepartmentId);
                 }
-
-                departmentPicker.ItemsSource = departments;
-                if(selectedDepartment != null)
-                {
-                    departmentPicker.SelectedIndex = departments.FindIndex(x => x.DepartmentId == selectedDepartment.DepartmentId);
-                }
-
             });
         }
 
@@ -190,7 +185,17 @@ namespace HRInvoiceApp
 
         private void OnSelectedDepartmentChanged(object sender, EventArgs e)
         {
-            selectedDepartment = departments[departmentPicker.SelectedIndex];
+            if (addAssignmentDepartmentPicker.SelectedIndex != -1)
+            {
+                selectedDepartment = departments[addAssignmentDepartmentPicker.SelectedIndex];
+            }
+        }
+
+        private async void OnSelectedCompanyChanged(object sender, EventArgs e)
+        {
+            selectedCompany = companies[addAssignmentCompanyPicker.SelectedIndex];
+            departments = await db.Table<Department>().Where(x => x.CompanyId == selectedCompany.CompanyId).ToListAsync();
+            addAssignmentDepartmentPicker.ItemsSource = departments;
         }
     }
 }
