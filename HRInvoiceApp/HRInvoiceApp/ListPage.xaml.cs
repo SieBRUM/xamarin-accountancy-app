@@ -39,6 +39,5 @@ namespace HRInvoiceApp
 
             await Navigation.PushModalAsync(page);
         }
-
     }
 }
