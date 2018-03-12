@@ -95,7 +95,6 @@ namespace HRInvoiceApp
             Task.Run(async () =>
             {
                 kvk.KvKNumber = int.Parse(kvkNumber.Text);
-
                 if (kvk.Id == 0)
                 {
                     await db.InsertAsync(kvk);
@@ -104,7 +103,6 @@ namespace HRInvoiceApp
                 {
                     await db.UpdateAsync(kvk);
                 }
-
                 user.KvKId = kvk.Id;
                 user.BankaccountNumber = bankNumber.Text;
                 user.EmailAddress = email.Text;

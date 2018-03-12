@@ -17,7 +17,7 @@ namespace HRInvoiceApp
 		{
 			InitializeComponent();
 
-			MainPage = new HRInvoiceApp.MainPage();
+			MainPage = new MainPage();
 		}
 
         public static AccountancyDatabase Database
