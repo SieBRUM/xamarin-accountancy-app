@@ -7,17 +7,17 @@
             <Label Text="Bedrijfsnaam *"></Label>
             <Entry x:Name="addCompanyCompanyName" Placeholder="Bedrijfsnaam *"></Entry>
             <Label Text="KvK nummer *"></Label>
-            <Entry x:Name="addKvKNumber" Placeholder="KvKNummer *"></Entry>
+            <Entry x:Name="addCompanyKvKNumber" Placeholder="KvKNummer *"></Entry>
             <Label Text="Adres *"></Label>
-            <Entry x:Name="addAddress" Placeholder="Adres *"></Entry>
+            <Entry x:Name="addCompanyAddress" Placeholder="Adres *"></Entry>
             <Label Text="Adres toevoeging"></Label>
-            <Entry x:Name="addAddressAddition" Placeholder="Adres toevoeging"></Entry>
+            <Entry x:Name="addCompanyAddressAddition" Placeholder="Adres toevoeging"></Entry>
             <Label Text="Stad *"></Label>
-            <Entry x:Name="addCity" Placeholder="Stad *"></Entry>
+            <Entry x:Name="addCompanyCity" Placeholder="Stad *"></Entry>
             <Label Text="Provincie *"></Label>
-            <Picker x:Name="addProvincePicker" ItemDisplayBinding="{Binding ProvinceName}"></Picker>
+            <Picker x:Name="addCompanyProvincePicker" ItemDisplayBinding="{Binding ProvinceName}"></Picker>
             <Label Text="Postcode *"></Label>
-            <Entry x:Name="addZipCode" Placeholder="Postcode *"></Entry>
+            <Entry x:Name="addCompanyZipCode" Placeholder="Postcode *"></Entry>
             <Button x:Name="saveButton"  Text="Opslaan" Clicked="saveCompany"></Button>
         </StackLayout>
     </ContentPage.Content>
