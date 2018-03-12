@@ -15,12 +15,6 @@ namespace HRInvoiceApp.Tables
             get;
             set;
         }
-        [ForeignKey(typeof(Assignment)), NotNull]
-        public int CostCenterNumber
-        {
-            get;
-            set;
-        }
         [ForeignKey(typeof(Company)), NotNull]
         public int CompanyId
         {

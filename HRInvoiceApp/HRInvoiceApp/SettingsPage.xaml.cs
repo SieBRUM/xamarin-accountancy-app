@@ -11,6 +11,7 @@ using HRInvoiceApp.Helpers;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Text.RegularExpressions;
 
 namespace HRInvoiceApp
 {
@@ -83,6 +84,12 @@ namespace HRInvoiceApp
             if(!InputValidationHelper.ValidateVATNumber(vatNumber.Text))
             {
                 DisplayAlert("Alert", "Graag een correct BTW nummer invullen.", "OK");
+            }
+
+            if (Regex.IsMatch(mobileNumber.Text, @"[a-zA-Z]"))
+            {
+                DisplayAlert("Alert", "Graag een correct telefoonnnummer invoeren", "Ok");
+                return;
             }
 
             Task.Run(async () =>
