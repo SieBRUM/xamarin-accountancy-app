@@ -46,6 +46,7 @@ namespace HRInvoiceApp
                 if(department == null)
                 {
                     await DisplayAlert("Alert", "Meegestuurde department staat niet in de database.", "Ok");
+                    department = new Department();
                     await Navigation.PopToRootAsync();
                     return;
                 }

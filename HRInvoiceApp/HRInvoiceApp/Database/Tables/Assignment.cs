@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using SQLite;
+using SQLiteNetExtensions.Attributes;
 
 namespace HRInvoiceApp.Tables
 {
@@ -14,8 +15,14 @@ namespace HRInvoiceApp.Tables
             get;
             set;
         }
+        [ForeignKey(typeof(Department)), NotNull]
+        public int DepartmentId
+        {
+            get;
+            set;
+        }
         [NotNull]
-        public int HourSalary
+        public float HourSalary
         {
             get;
             set;
