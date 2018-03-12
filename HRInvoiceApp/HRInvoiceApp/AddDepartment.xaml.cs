@@ -52,7 +52,6 @@ namespace HRInvoiceApp
                 }
                 selectedCompany = await db.Table<Company>().FirstOrDefaultAsync(x => x.CompanyId == department.CompanyId);
                 addDepartmentBankNumber.Text = department.BankaccountNumber;
-                addDepartmentCostCenterNumber.Text = department.CostCenterNumber.ToString();
                 addDepartmentDepartmentName.Text = department.DepartmentName;
             });
         }
@@ -113,16 +112,9 @@ namespace HRInvoiceApp
                 return;
             }
 
-            if(!int.TryParse(addDepartmentCostCenterNumber.Text, out int result))
-            {
-                DisplayAlert("Alert", "Graag een correcte Kostenplaatsnummer invullen", "Ok");
-                return;
-            }
-
             department.BankaccountNumber = addDepartmentBankNumber.Text;
             department.CompanyId = selectedCompany.CompanyId;
             department.DepartmentName = addDepartmentDepartmentName.Text;
-            department.CostCenterNumber = int.Parse(addDepartmentCostCenterNumber.Text);
 
             Task.Run(async () =>
             {
