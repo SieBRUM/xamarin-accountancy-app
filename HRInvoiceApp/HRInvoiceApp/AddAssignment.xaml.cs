@@ -132,7 +132,7 @@ namespace HRInvoiceApp
 
             string salary = addAssignmentHourSalary.Text.Replace(" ", "").Replace("€", "");
 
-            if(!float.TryParse(salary, out float floatSalary)
+            if(!float.TryParse(salary, out float floatSalary))
             {
                 DisplayAlert("Alert", "Graag een correct salaris invoeren", "Ok");
                 return;
