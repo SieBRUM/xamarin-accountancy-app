@@ -14,9 +14,9 @@ using Xamarin.Forms.Xaml;
 
 namespace HRInvoiceApp
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddAssignment : ContentPage
-    {
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class AddAssignment : ContentPage
+	{
         Assignment assignment;
         SQLiteAsyncConnection db;
         List<Department> departments;
@@ -118,20 +118,21 @@ namespace HRInvoiceApp
                 return;
             }
 
-            if (!InputValidationHelper.IsValidEmail(addAssignmentClientEmail.Text))
+            if(!InputValidationHelper.IsValidEmail(addAssignmentClientEmail.Text))
             {
                 DisplayAlert("Alert", "Graag een correct email adres invoeren", "Ok");
                 return;
             }
 
-            if (Regex.IsMatch(addAssignmentClientMobileNumber.Text, @"[a-zA-Z]"))
+            if(Regex.IsMatch(addAssignmentClientMobileNumber.Text, @"[a-zA-Z]"))
             {
                 DisplayAlert("Alert", "Graag een correct telefoonnnummer invoeren", "Ok");
                 return;
             }
 
             string salary = addAssignmentHourSalary.Text.Replace(" ", "").Replace("€", "");
-            if (!float.TryParse(salary, out float floatSalary))
+
+            if(!float.TryParse(salary, out float floatSalary)
             {
                 DisplayAlert("Alert", "Graag een correct salaris invoeren", "Ok");
                 return;
@@ -171,7 +172,7 @@ namespace HRInvoiceApp
                 }
 
                 bool openAddWorkday = await DisplayAlert("Succes", "Opdracht succesvol toegevoegd. Wilt u een werkdag toevoegen?", "Ja", "Nee");
-                if (openAddWorkday)
+                if(openAddWorkday)
                 {
                     // do some navigating
                 }
