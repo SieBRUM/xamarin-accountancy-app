@@ -20,19 +20,19 @@ namespace HRInvoiceApp
         {
             InitializeComponent();
             ToolbarItems.Add(new ToolbarItem() { Icon = "Images/addCompany_icon.png", Command = new Command(gotoAddCompany) });
+            companyListview.ItemTapped += CompanyListview_ItemTapped;
         }
         protected async override void OnAppearing()
         {
             base.OnAppearing();
 
             companyListview.ItemsSource = await db.Table<Company>().ToListAsync();
-            companyListview.ItemTapped += CompanyListview_ItemTapped;
         }
 
         private void CompanyListview_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            //to be implemented
-            gotoAddCompany();
+            var company = e.Item as Company;
+            Navigation.PushModalAsync(new AddCompany(company.CompanyId));
         }
 
         async void gotoAddCompany()

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HRInvoiceApp.ListPage">
     <ContentPage.Content>
-        <ListView x:Name="BanaanListview" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ListView x:Name="UserListView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextCell Text="{Binding UserLastName}" Detail="{Binding Designation}"/>

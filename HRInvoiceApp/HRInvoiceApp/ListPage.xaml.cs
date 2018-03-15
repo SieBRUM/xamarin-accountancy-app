@@ -25,7 +25,7 @@ namespace HRInvoiceApp
         {
             base.OnAppearing();
 
-            BanaanListview.ItemsSource = await db.Table<User>().ToListAsync();
+            UserListView.ItemsSource = await db.Table<User>().ToListAsync();
         }
         async void gotoAssignment()
         {
@@ -39,6 +39,5 @@ namespace HRInvoiceApp
 
             await Navigation.PushModalAsync(page);
         }
-
     }
 }

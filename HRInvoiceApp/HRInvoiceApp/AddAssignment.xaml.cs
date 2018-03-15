@@ -24,9 +24,9 @@ namespace HRInvoiceApp
         Department selectedDepartment;
         Company selectedCompany;
 
-		public AddAssignment()
-		{
-			InitializeComponent();
+        public AddAssignment()
+        {
+            InitializeComponent();
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             db = App.Database.GetInstance();
             assignment = new Assignment();
@@ -131,7 +131,8 @@ namespace HRInvoiceApp
             }
 
             string salary = addAssignmentHourSalary.Text.Replace(" ", "").Replace("€", "");
-            if(!float.TryParse(salary, out float floatSalary))
+
+            if(!float.TryParse(salary, out float floatSalary)
             {
                 DisplayAlert("Alert", "Graag een correct salaris invoeren", "Ok");
                 return;

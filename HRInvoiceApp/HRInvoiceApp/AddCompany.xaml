@@ -5,19 +5,19 @@
     <ContentPage.Content>
         <StackLayout x:Name="addCompanyStackLayout">
             <Label Text="Bedrijfsnaam *"></Label>
-            <Entry x:Name="companyName" Placeholder="Bedrijfsnaam *" Text="{Binding}"></Entry>
+            <Entry x:Name="addCompanyCompanyName" Placeholder="Bedrijfsnaam *"></Entry>
             <Label Text="KvK nummer *"></Label>
-            <Entry x:Name="KvKNumber" Placeholder="KvKNummer *" Text="{Binding}"></Entry>
+            <Entry x:Name="addCompanyKvKNumber" Placeholder="KvKNummer *"></Entry>
             <Label Text="Adres *"></Label>
-            <Entry x:Name="Address" Placeholder="Adres *" Text="{Binding}"></Entry>
+            <Entry x:Name="addCompanyAddress" Placeholder="Adres *"></Entry>
             <Label Text="Adres toevoeging"></Label>
-            <Entry x:Name="AddressAddition" Placeholder="Adres toevoeging" Text="{Binding}"></Entry>
+            <Entry x:Name="addCompanyAddressAddition" Placeholder="Adres toevoeging"></Entry>
             <Label Text="Stad *"></Label>
-            <Entry x:Name="City" Placeholder="Stad *" Text="{Binding}"></Entry>
+            <Entry x:Name="addCompanyCity" Placeholder="Stad *"></Entry>
             <Label Text="Provincie *"></Label>
-            <Picker x:Name="ProvincePicker" ItemDisplayBinding="{Binding ProvinceName}"></Picker>
+            <Picker x:Name="addCompanyProvincePicker" ItemDisplayBinding="{Binding ProvinceName}"></Picker>
             <Label Text="Postcode *"></Label>
-            <Entry x:Name="ZipCode" Placeholder="Postcode *" Text="{Binding}"></Entry>
+            <Entry x:Name="addCompanyZipCode" Placeholder="Postcode *"></Entry>
             <Button x:Name="saveButton"  Text="Opslaan" Clicked="saveCompany"></Button>
         </StackLayout>
     </ContentPage.Content>
