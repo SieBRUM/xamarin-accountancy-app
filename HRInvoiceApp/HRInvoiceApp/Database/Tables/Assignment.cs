@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SQLite;
+﻿using SQLite;
 using SQLiteNetExtensions.Attributes;
 
 namespace HRInvoiceApp.Tables
@@ -50,6 +47,14 @@ namespace HRInvoiceApp.Tables
         {
             get;
             set;
+        }
+
+        public string fullName
+        {
+            get
+            {
+                return $"{ClientFirstName} {ClientLastName} ({CostCenterNumber})";
+            }
         }
     }
 }

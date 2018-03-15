@@ -66,24 +66,21 @@ namespace HRInvoiceApp
             });
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
-            Task.Run(async () =>
-            {
-                companies = await db.Table<Company>().ToListAsync();
-                addAssignmentCompanyPicker.ItemsSource = companies;
+            companies = await db.Table<Company>().ToListAsync();
+            addAssignmentCompanyPicker.ItemsSource = companies;
 
-                if (selectedDepartment != null)
-                {
-                    addAssignmentCompanyPicker.SelectedIndex = companies.FindIndex(x => x.CompanyId == selectedDepartment.CompanyId);
-                    selectedCompany = companies.Where(x => x.CompanyId == selectedDepartment.CompanyId).FirstOrDefault();
-                    departments = await db.Table<Department>().Where(x => x.CompanyId == selectedCompany.CompanyId).ToListAsync();
-                    addAssignmentDepartmentPicker.ItemsSource = departments;
-                    addAssignmentDepartmentPicker.SelectedIndex = departments.FindIndex(x => x.DepartmentId == selectedDepartment.DepartmentId);
-                }
-            });
+            if (selectedDepartment != null)
+            {
+                addAssignmentCompanyPicker.SelectedIndex = companies.FindIndex(x => x.CompanyId == selectedDepartment.CompanyId);
+                selectedCompany = companies.Where(x => x.CompanyId == selectedDepartment.CompanyId).FirstOrDefault();
+                departments = await db.Table<Department>().Where(x => x.CompanyId == selectedCompany.CompanyId).ToListAsync();
+                addAssignmentDepartmentPicker.ItemsSource = departments;
+                addAssignmentDepartmentPicker.SelectedIndex = departments.FindIndex(x => x.DepartmentId == selectedDepartment.DepartmentId);
+            }
         }
 
         void SaveAssignment(object sender, EventArgs e)
@@ -155,14 +152,14 @@ namespace HRInvoiceApp
                     assignment.CostCenterNumber = CostCenterNumber;
                     if (tempAssignment != null)
                     {
-                        bool cancel = !await DisplayAlert("Alert", "Er is al een opdracht met dit kostenplaatsnummer. Wilt u deze overschrijven?", "Ja", "Nee");
-                        if (cancel)
+                        bool doOverwrite = await DisplayAlert("Alert", "Er is al een opdracht met dit kostenplaatsnummer. Wilt u deze overschrijven?", "Ja", "Nee");
+                        if (doOverwrite)
                         {
-                            return;
+                            await db.InsertAsync(assignment);
                         }
                         else
                         {
-                            await db.InsertAsync(assignment);
+                            return;
                         }
                     }
                     await db.InsertAsync(assignment);
@@ -179,8 +176,6 @@ namespace HRInvoiceApp
                     // do some navigating
                 }
             });
-
-
         }
 
         private void OnSelectedDepartmentChanged(object sender, EventArgs e)

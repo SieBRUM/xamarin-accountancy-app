@@ -29,7 +29,7 @@ namespace HRInvoiceApp
         }
         async void gotoAssignment()
         {
-            var page = new AddAssignment();
+            var page = new AddWorkday(1);
 
             await Navigation.PushModalAsync(page);
         }
