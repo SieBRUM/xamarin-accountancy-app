@@ -3,12 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HRInvoiceApp.ListPage">
     <ContentPage.Content>
-        <ListView x:Name="UserListView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ListView x:Name="WorkdayListView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding UserLastName}" Detail="{Binding Designation}"/>
+                    <ViewCell>
+                        <Grid>
+                            <Label HorizontalOptions="Start" Text="{Binding Date, StringFormat='{0:dddd d MMMM yyyy}'}"/>
+                            <Label HorizontalOptions="End" VerticalTextAlignment="End" Text="{Binding CostCenterNumber, StringFormat='KPN: {0:F0}'}" TextColor="Gray"/>
+                        </Grid>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-</ContentPage.Content>
+    </ContentPage.Content>
 </ContentPage>
