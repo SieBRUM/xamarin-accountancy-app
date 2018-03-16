@@ -51,5 +51,13 @@ namespace HRInvoiceApp.Tables
             get;
             set;
         }
+
+        public string fullName
+        {
+            get
+            {
+                return $"{ClientFirstName} {ClientLastName} ({CostCenterNumber})";
+            }
+        }
     }
 }

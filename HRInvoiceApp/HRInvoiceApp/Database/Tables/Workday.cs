@@ -32,7 +32,7 @@ namespace HRInvoiceApp.Tables
             get;
             set;
         }
-        public int ExtraExpenses
+        public string ExtraExpenses
         {
             get;
             set;
