@@ -121,6 +121,7 @@ namespace HRInvoiceApp
                 {
                     await db.UpdateAsync(kvk);
                 }
+
                 company.KvKId = kvk.Id;
                 company.Province = ((Province)addCompanyProvincePicker.SelectedItem).ProvinceName;
                 company.CompanyName = addCompanyCompanyName.Text;
