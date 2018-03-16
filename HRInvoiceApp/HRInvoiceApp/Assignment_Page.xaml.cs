@@ -25,8 +25,8 @@ namespace HRInvoiceApp
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-
-            companyListview.ItemsSource = await db.Table<Company>().ToListAsync();
+            var company = await db.Table<Company>().ToListAsync();
+            companyListview.ItemsSource = company;
         }
 
         private void CompanyListview_ItemTapped(object sender, ItemTappedEventArgs e)
