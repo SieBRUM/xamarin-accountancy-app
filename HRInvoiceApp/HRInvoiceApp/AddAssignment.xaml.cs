@@ -14,9 +14,9 @@ using Xamarin.Forms.Xaml;
 
 namespace HRInvoiceApp
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class AddAssignment : ContentPage
-	{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class AddAssignment : ContentPage
+    {
         Assignment assignment;
         SQLiteAsyncConnection db;
         List<Department> departments;
@@ -24,9 +24,9 @@ namespace HRInvoiceApp
         Department selectedDepartment;
         Company selectedCompany;
 
-		public AddAssignment()
-		{
-			InitializeComponent();
+        public AddAssignment()
+        {
+            InitializeComponent();
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             db = App.Database.GetInstance();
             assignment = new Assignment();
@@ -66,24 +66,21 @@ namespace HRInvoiceApp
             });
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
-            Task.Run(async () =>
-            {
-                companies = await db.Table<Company>().ToListAsync();
-                addAssignmentCompanyPicker.ItemsSource = companies;
+            companies = await db.Table<Company>().ToListAsync();
+            addAssignmentCompanyPicker.ItemsSource = companies;
 
-                if (selectedDepartment != null)
-                {
-                    addAssignmentCompanyPicker.SelectedIndex = companies.FindIndex(x => x.CompanyId == selectedDepartment.CompanyId);
-                    selectedCompany = companies.Where(x => x.CompanyId == selectedDepartment.CompanyId).FirstOrDefault();
-                    departments = await db.Table<Department>().Where(x => x.CompanyId == selectedCompany.CompanyId).ToListAsync();
-                    addAssignmentDepartmentPicker.ItemsSource = departments;
-                    addAssignmentDepartmentPicker.SelectedIndex = departments.FindIndex(x => x.DepartmentId == selectedDepartment.DepartmentId);
-                }
-            });
+            if (selectedDepartment != null)
+            {
+                addAssignmentCompanyPicker.SelectedIndex = companies.FindIndex(x => x.CompanyId == selectedDepartment.CompanyId);
+                selectedCompany = companies.Where(x => x.CompanyId == selectedDepartment.CompanyId).FirstOrDefault();
+                departments = await db.Table<Department>().Where(x => x.CompanyId == selectedCompany.CompanyId).ToListAsync();
+                addAssignmentDepartmentPicker.ItemsSource = departments;
+                addAssignmentDepartmentPicker.SelectedIndex = departments.FindIndex(x => x.DepartmentId == selectedDepartment.DepartmentId);
+            }
         }
 
         void SaveAssignment(object sender, EventArgs e)
@@ -121,20 +118,20 @@ namespace HRInvoiceApp
                 return;
             }
 
-            if(!InputValidationHelper.IsValidEmail(addAssignmentClientEmail.Text))
+            if (!InputValidationHelper.IsValidEmail(addAssignmentClientEmail.Text))
             {
                 DisplayAlert("Alert", "Graag een correct email adres invoeren", "Ok");
                 return;
             }
 
-            if(Regex.IsMatch(addAssignmentClientMobileNumber.Text, @"[a-zA-Z]"))
+            if (Regex.IsMatch(addAssignmentClientMobileNumber.Text, @"[a-zA-Z]"))
             {
                 DisplayAlert("Alert", "Graag een correct telefoonnnummer invoeren", "Ok");
                 return;
             }
 
             string salary = addAssignmentHourSalary.Text.Replace(" ", "").Replace("€", "");
-            if(!float.TryParse(salary, out float floatSalary))
+            if (!float.TryParse(salary, out float floatSalary))
             {
                 DisplayAlert("Alert", "Graag een correct salaris invoeren", "Ok");
                 return;
@@ -155,14 +152,14 @@ namespace HRInvoiceApp
                     assignment.CostCenterNumber = CostCenterNumber;
                     if (tempAssignment != null)
                     {
-                        bool cancel = !await DisplayAlert("Alert", "Er is al een opdracht met dit kostenplaatsnummer. Wilt u deze overschrijven?", "Ja", "Nee");
-                        if (cancel)
+                        bool doOverwrite = await DisplayAlert("Alert", "Er is al een opdracht met dit kostenplaatsnummer. Wilt u deze overschrijven?", "Ja", "Nee");
+                        if (doOverwrite)
                         {
-                            return;
+                            await db.InsertAsync(assignment);
                         }
                         else
                         {
-                            await db.InsertAsync(assignment);
+                            return;
                         }
                     }
                     await db.InsertAsync(assignment);
@@ -174,13 +171,11 @@ namespace HRInvoiceApp
                 }
 
                 bool openAddWorkday = await DisplayAlert("Succes", "Opdracht succesvol toegevoegd. Wilt u een werkdag toevoegen?", "Ja", "Nee");
-                if(openAddWorkday)
+                if (openAddWorkday)
                 {
                     // do some navigating
                 }
             });
-
-
         }
 
         private void OnSelectedDepartmentChanged(object sender, EventArgs e)

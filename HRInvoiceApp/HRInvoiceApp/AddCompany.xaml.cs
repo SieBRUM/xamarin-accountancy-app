@@ -47,7 +47,7 @@ namespace HRInvoiceApp
                 }
                 kvk = new KvK();
                 company = new Company();
-                addProvincePicker.ItemsSource = provinces;
+                addCompanyProvincePicker.ItemsSource = provinces;
             });
         }
         public AddCompany(int companyId)
@@ -68,13 +68,13 @@ namespace HRInvoiceApp
                     return;
                 }
                 addCompanyCompanyName.Text = company.CompanyName;
-                addKvKNumber.Text = kvk.KvKNumber.ToString();
-                addAddress.Text = company.Address;
-                addAddressAddition.Text = company.AddressAddition;
-                addCity.Text = company.City;
-                addProvincePicker.ItemsSource = provinces;
-                addProvincePicker.SelectedIndex = provinces.FindIndex(x => x.ProvinceName == company.Province);
-                addZipCode.Text = company.Zipcode;
+                addCompanyKvKNumber.Text = kvk.KvKNumber.ToString();
+                addCompanyAddress.Text = company.Address;
+                addCompanyAddressAddition.Text = company.AddressAddition;
+                addCompanyCity.Text = company.City;
+                addCompanyProvincePicker.ItemsSource = provinces;
+                addCompanyProvincePicker.SelectedIndex = provinces.FindIndex(x => x.ProvinceName == company.Province);
+                addCompanyZipCode.Text = company.Zipcode;
             });
         }
         void saveCompany(object sender, EventArgs e)
@@ -98,13 +98,13 @@ namespace HRInvoiceApp
                     }
                 }
             }
-            if (addKvKNumber.Text.Count() != 8 || !int.TryParse(addKvKNumber.Text, out int result))
+            if (addCompanyKvKNumber.Text.Count() != 8 || !int.TryParse(addCompanyKvKNumber.Text, out int result))
             {
                 DisplayAlert("Alert", "Graag een correct KvK nummer invullen.", "OK");
                 return;
             }
 
-            if (!InputValidationHelper.IsZipCodeValid(addZipCode.Text))
+            if (!InputValidationHelper.IsZipCodeValid(addCompanyZipCode.Text))
             {
                 DisplayAlert("Alert", "Graag een geldige postcode invullen.", "OK");
                 return;
@@ -112,7 +112,7 @@ namespace HRInvoiceApp
 
             Task.Run(async () =>
             {
-                kvk.KvKNumber = int.Parse(addKvKNumber.Text);
+                kvk.KvKNumber = int.Parse(addCompanyKvKNumber.Text);
                 if (kvk.Id == 0)
                 {
                     await db.InsertAsync(kvk);
@@ -122,12 +122,12 @@ namespace HRInvoiceApp
                     await db.UpdateAsync(kvk);
                 }
                 company.KvKId = kvk.Id;
-                company.Province = ((Province)addProvincePicker.SelectedItem).ProvinceName;
+                company.Province = ((Province)addCompanyProvincePicker.SelectedItem).ProvinceName;
                 company.CompanyName = addCompanyCompanyName.Text;
-                company.Address = addAddress.Text;
-                company.AddressAddition = addAddressAddition.Text;
-                company.City = addCity.Text;
-                company.Zipcode = addZipCode.Text;
+                company.Address = addCompanyAddress.Text;
+                company.AddressAddition = addCompanyAddressAddition.Text;
+                company.City = addCompanyCity.Text;
+                company.Zipcode = addCompanyZipCode.Text;
                 if (company.CompanyId == 0)
                 {
                     await db.InsertAsync(company);
